@@ -27,6 +27,7 @@
 
 import sys, os
 import re
+import six
 
 class Templite(object):
 
@@ -109,7 +110,7 @@ class Templite(object):
         # add write method
         def write(*args):
             for value in args:
-                if isinstance(value, unicode):
+                if isinstance(value, six.text_type):
                     value = value.encode(self.encoding)
                 stack.append(str(value))
         namespace['write'] = write
@@ -126,5 +127,5 @@ class Templite(object):
             stack.append(t.render(**namespace))
         namespace['include'] = include
         # execute template code
-        exec self._code in namespace
+        six.exec_(self._code, namespace)
         return ''.join(stack)

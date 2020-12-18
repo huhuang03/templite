@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 setup(
 
     name="templite",
-    version="0.2.1",
+    version="0.2.2",
     py_modules=['templite'],
     author="Sam et Max",
     author_email="lesametlemax@gmail.com",
@@ -22,6 +22,7 @@ setup(
         "Natural Language :: English",
         "Programming Language :: Python :: 2.7",
     ],
-    url="http://www.joonis.de/en/code/templite"
+    url="http://www.joonis.de/en/code/templite",
+    install_requires=['six']
 )
 
