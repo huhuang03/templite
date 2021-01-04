@@ -110,9 +110,10 @@ class Templite(object):
         # add write method
         def write(*args):
             for value in args:
-                if isinstance(value, six.text_type):
-                    value = value.encode(self.encoding)
-                stack.append(str(value))
+                if isinstance(value, six.binary_type):
+                    stack.append(value.encode(self.encoding))
+                else:
+                    stack.append(str(value))
         namespace['write'] = write
         # add include method
         def include(file):
@@ -128,4 +129,5 @@ class Templite(object):
         namespace['include'] = include
         # execute template code
         six.exec_(self._code, namespace)
+        # why stack's str has b''?
         return ''.join(stack)
